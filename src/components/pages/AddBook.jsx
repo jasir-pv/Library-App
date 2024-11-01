@@ -28,6 +28,8 @@ function AddBook() {
     setBookData({ ...bookData, img: e.target.files[0] });
   };
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault()
 

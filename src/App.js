@@ -4,6 +4,8 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/pages/Home';
 import { useSelector } from "react-redux";
+import BookDetails from './components/pages/BookDetails';
+import AddBook from './components/pages/AddBook';
 
 function App() {
  
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<Home />} />        
           <Route path="/login" element={<Login />} />  
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/book/:id" element={<BookDetails />} />
+          <Route path="/addbook" element={<AddBook />} />
         </Routes>
       </BrowserRouter>
     </div>

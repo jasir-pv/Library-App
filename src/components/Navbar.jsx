@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';import { Link } from 'react-router-dom';
+import { lightBlue } from '@mui/material/colors';
 
 
 const Container = styled.div`
@@ -47,6 +48,9 @@ const Button = styled.div`
         background-color: #03a83a;
     }
 `
+ const Add = styled.div`
+ 
+ `
 
 
 function Navbar() {
@@ -61,7 +65,11 @@ function Navbar() {
     <div className='container'>
     <Container>
         <Logo>Libe</Logo>
+        
         <Navlinks>
+            <Link to='/addbook'>
+            <AddCircleSharpIcon style={{color: '#0972ab',marginTop:5, height:100,}}/>
+            </Link>
             <Home>Home</Home>
             <About>About</About>
             <Search>Search</Search>
