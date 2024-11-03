@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
-import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';import { Link } from 'react-router-dom';
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';import { Link, useNavigate } from 'react-router-dom';
 import { lightBlue } from '@mui/material/colors';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Container = styled.div`
@@ -54,12 +55,25 @@ const Button = styled.div`
 
 
 function Navbar() {
+   
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    // const user =JSON.parse( localStorage.getItem("profile"));
+
+
+    const user = useSelector((state) => state.auth.user);
+    console.log(user, "username is")
 
     const handleClick = (e) => {
         e.preventDefault();
 
     }
-    
+
+    const handleLogOut = () => {
+        dispatch({ type: "LOGOUT" });
+        navigate("/");
+      };
+  
 
   return (
     <div className='container'>
@@ -73,9 +87,14 @@ function Navbar() {
             <Home>Home</Home>
             <About>About</About>
             <Search>Search</Search>
-            <Link to='/login'>
-            <Button >Login</Button>
+
+           { user ? ( <Link to='/'>
+            <Button >`${user.username}`</Button>
             </Link>
+            )  :(
+             <Link to='/login'>
+            <Button   onClick={handleLogOut}>Login</Button>
+            </Link>)}
         </Navlinks>
     </Container>
 

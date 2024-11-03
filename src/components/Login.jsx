@@ -1,12 +1,11 @@
 // Login.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import LockIcon from '@mui/icons-material/Lock';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-
-
+import { login } from '../actions/auth';
 
 
 const LoginContainer = styled(Container)({
@@ -45,19 +44,40 @@ const Bottom_Button = styled('div')({
 
 
 
+
 function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const {isFetching, error} = useSelector((state) => state.user);
+  const user = null;
+  const { isFetching, error } = useSelector((state) => state.auth);
+
+
+  const state = useSelector((state) => state);
+console.log(state);
+
+
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     navigate('/userpage'); // Replace '/userpage' with the path to your user page
+  //   }
+  // }, [currentUser, navigate]);
+
+  
+    // const {isFetching, error} = useSelector((state) => state.userData);
 
   const handleClick =(e)=>{
     e.preventDefault()
   
-    // login(dispatch, {username,password})
+    login(dispatch, { username, password });
+    navigate('/'); // Add navigation after login success
+  
   }
+
+
+
 
 
   return (
@@ -91,10 +111,12 @@ function Login() {
           variant="contained"
           color="primary"
           fullWidth
-          onClick={handleClick} disabled={isFetching}
+          onClick={handleClick}
+
         >
           Sign In
         </Button>
+       
         <Bottom_Button>
         
       <Typography  style={{cursor:'pointer', color:'',}}><Link to="/signup"> create new Account Sign Up</Link></Typography>

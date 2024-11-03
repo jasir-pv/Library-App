@@ -1,9 +1,11 @@
 // SignUp.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Link } from 'react-router-dom';
+import { signup } from '../actions/auth';
+import { useDispatch } from 'react-redux';
 
 const SignUpContainer = styled(Container)({
   display: 'flex',
@@ -35,7 +37,32 @@ const SignUpForm = styled('form')({
 });
 
 function SignUp() {
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData)
+
+    signup(dispatch, {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    });
+  };
+
   return (
+    <>
     <SignUpContainer maxWidth="xs">
       <IconWrapper>
         <PersonAddIcon fontSize="large" />
@@ -46,42 +73,56 @@ function SignUp() {
       <SignUpForm>
         <TextField
           label="username"
+          name="username"
           variant="outlined"
+          value={formData.username} 
           fullWidth
           required
+          onChange={handleChange}
         />
         <TextField
           label="Email Address"
+           name="email"
+           value={formData.email}        
           variant="outlined"
           fullWidth
           required
+          onChange={handleChange}
         />
         <TextField
           label="Password"
+            name="password"
+            value={formData.password} 
           variant="outlined"
           type="password"
           fullWidth
           required
+          onChange={handleChange}
         />
         <TextField
           label="Confirm Password"
+           name="confirmPassword"
+           value={formData.confirmPassword}
           variant="outlined"
           type="password"
           fullWidth
           required
+          onChange={handleChange}
         />
         <Button
           type="submit"
           variant="contained"
           color="primary"
           fullWidth
+          onClick={handleSubmit}
         >
           Sign Up
         </Button>
       </SignUpForm>
-    <Typography> <Link to="/login"><div> Already Created Account</div></Link></Typography>
+    <Typography> <Link to="/login"> Already Created Account</Link></Typography>
      
     </SignUpContainer>
+    </>
   );
 }
 
