@@ -28,3 +28,13 @@ export const deleteBook = (id) => async (dispatch) =>{
         console.log(error,"Failed to delete book")
     }
 }
+
+
+export const updateBook= (id, book) => async (dispatch)=>{
+    try{
+        const {data} = await api.updateBook(id,book)
+        dispatch ({type: 'UPDATE', payload:data})
+    }catch(error){
+        console.log(error)
+    }
+}

@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `
  
 
-function Books({book}) {
+function Books({book, setCurrentId}) {
 
   const books = useSelector((state)=> state.books)
 

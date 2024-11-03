@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Navbar from '../Navbar';
-import AddBook from './AddBook';
-import { deleteBook } from '../../actions/books';
+import { deleteBook, updateBook } from '../../actions/books';
+import EditBook from './EditBook';
 
 const Container = styled.div`
   
@@ -40,10 +40,11 @@ const InfoContainer = styled.div`
 
 `
 const Buttons = styled.div`
-      margin-top: 20px;
+      margin-top: 100px;
+
 `
 const CheckIn = styled.button`
-      padding: 10px;
+      padding: 15px 0;
       border: none;
       width: 100%;
      background-color: black;
@@ -106,6 +107,35 @@ function BookDetails() {
   const book = useSelector((state) =>
     state.books.find((book) => book._id === id || book.id === id)
   );
+  const [isEditing, setIsEditing] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   title: 'book.title',
+  //   author: '',
+  //   category: '',
+  //   availability: '',
+  //   selectedFile: ''
+  // });
+
+  // Load book data into form when entering edit mode
+  // useEffect(() => {
+  //   if (book && isEditing) {
+  //     setFormData({
+  //       title: book.title,
+  //       author: book.author,
+  //       category: book.category,
+  //       availability: book.availability,
+  //       selectedFile: book.selectedFile
+  //     });
+  //   }
+  // }, [book, isEditing]);
+
+  // Toggle edit mode and pre-fill form with book data
+
+
+  // Handle form input changes
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   useEffect(() => {
     if (!book) {
@@ -116,13 +146,20 @@ function BookDetails() {
   if (!book) return <p>Loading...</p>;
 
   const handleEditClick = () => {
-    setShowAddBook((prev) => !prev); // Toggle visibility of AddBook component
+    setIsEditing(true)
+    // setShowAddBook((prev) => !prev); // Toggle visibility of AddBook component
   };
+
 
   const handleDeleteClick = () =>{
     dispatch(deleteBook(book._id || book.id))
     navigate('/')
   }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(updateBook(id, formData));
+  //   setIsEditing(false); // Exit edit mode after updating
+  // };
   return (
     
     <Container>
@@ -143,15 +180,15 @@ function BookDetails() {
       <p><strong>Availability:</strong> {book.availablity}</p>
       <p><strong>Description:</strong> {book.description || 'No description available.'}</p>
       <Buttons>
-      <Edit onClick={handleEditClick}>Edit</Edit>
+      <Edit onClick={handleEditClick} >Edit</Edit>
       <Delete  onClick={handleDeleteClick}>Delete</Delete>
       <CheckIn>Check in</CheckIn> 
       </Buttons>
       </InfoContainer>
       </Details>
-      {showAddBook && (
+      {isEditing && (
           <Update>
-            <AddBook />
+            <EditBook book={book} setIsEditing={setIsEditing}/>
           </Update>
         )}
     </Wrapper>

@@ -1,13 +1,13 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createBook } from '../../actions/books';
+
+import { createBook, updateBook } from '../../actions/books';
 
 
-function AddBook() {
+function EditBook({book, setIsEditing}) {
     const dispatch = useDispatch()
-  
   const [bookData, setBookData] = useState({
     title: '',
     author: '',
@@ -15,6 +15,12 @@ function AddBook() {
     availability: '',
     image: null,
   });
+
+  useEffect(() => {
+    if (book) {
+      setBookData(book);
+    }
+  }, [book]);
 
 
 
@@ -29,12 +35,11 @@ function AddBook() {
   };
 
 
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    dispatch(createBook(bookData))
-    console.log(bookData); // Handle form submission logic
+    dispatch(updateBook(book._id,bookData))
+    setIsEditing(false);
   };
 
   return (
@@ -52,7 +57,7 @@ function AddBook() {
       }}
     >
       <Typography variant="h5" align="center">
-        Add Book
+        Edit Book
       </Typography>
 
       <TextField
@@ -62,7 +67,7 @@ function AddBook() {
         onChange={handleChange}
         fullWidth
       />
-
+    console.log(value)
       <TextField
         label="Author"
         name="author"
@@ -113,11 +118,11 @@ function AddBook() {
         color="primary"
         onClick={handleSubmit}
       >
-        Add Book
+       Update
       </Button>
     </Box>
   );
 }
 
-export default AddBook;
+export default EditBook;
 

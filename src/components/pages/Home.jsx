@@ -8,7 +8,7 @@ import Book from './BookDetails'
 
 function Home() {
 
-  const [currentId,setCurrentId] = useState(null)
+ 
   const dispatch  = useDispatch()
 
 
@@ -19,7 +19,7 @@ function Home() {
   return (
     <div>
       <Navbar/>
-      <Books setCurrentId={setCurrentId}/>
+      <Books />
       
     </div>
   )
