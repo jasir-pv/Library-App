@@ -137,6 +137,8 @@ function BookDetails() {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
   // };
 
+  const user = useSelector((state)=> state.auth.user)
+
   useEffect(() => {
     if (!book) {
       // Optionally fetch the book if it's not already in the state
@@ -146,14 +148,22 @@ function BookDetails() {
   if (!book) return <p>Loading...</p>;
 
   const handleEditClick = () => {
+    if (user&& user.isAdmin){
     setIsEditing(true)
+  }else{
+    alert("Only Admins Can Edit the Book")
+  }
     // setShowAddBook((prev) => !prev); // Toggle visibility of AddBook component
   };
 
 
   const handleDeleteClick = () =>{
+    if (user&& user.isAdmin){
     dispatch(deleteBook(book._id || book.id))
     navigate('/')
+  }else{
+    alert( "Only Admins Can Delete the Book")
+  }
   }
   // const handleSubmit = (e) => {
   //   e.preventDefault();

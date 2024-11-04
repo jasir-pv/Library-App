@@ -3,14 +3,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/pages/Home';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BookDetails from './components/pages/BookDetails';
 import AddBook from './components/pages/AddBook';
+import { useEffect } from 'react';
 
 
 function App() {
- const user= true
- console.log(user)
+
+ const dispatch = useDispatch();
+
+ useEffect(() => {
+   const storedUser = JSON.parse(localStorage.getItem('user'));
+   if (storedUser) {
+     dispatch({ type: 'LOGIN_SUCCESS', payload: storedUser });
+   }
+ }, [dispatch]);
+
   return (
     <div className="App">
       <BrowserRouter>

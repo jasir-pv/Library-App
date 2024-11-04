@@ -6,21 +6,36 @@ import {Provider} from "react-redux"
 import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 import reducers from './reducers';
 import {thunk} from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/integration/react';
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
 
 const store = configureStore({
-  reducer: reducers,
-   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   // devTools: process.env.NODE_ENV !== "production",
 });
 
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-  
-    <App />
-  
+   <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
     </Provider>
 
 );
 
+
+export { store, persistor };

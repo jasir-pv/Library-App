@@ -35,6 +35,7 @@ export const login = async (dispatch, userData) => {
     dispatch({ type: 'LOGIN_START' });
     try {
       const res = await axios.post('http://localhost:5000/auth/login', userData);
+    
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
       localStorage.setItem('user', JSON.stringify(res.data)); // Store token/user data if needed
       

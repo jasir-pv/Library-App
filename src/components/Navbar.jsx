@@ -26,16 +26,36 @@ const Navlinks = styled.ul`
     list-style: none;
 `
 
+const Users = styled.li`
+    margin: 10px;
+`
+
 const Home = styled.li`
-    margin: 20px;
+    margin: 10px;
+    cursor: pointer;
 `
 const About = styled.li`
-    margin: 20px;
+    margin: 10px;
 `
 const Search = styled.li`
-    margin: 20px;
+    margin: 10px;
 `
 const Button = styled.div`
+    margin: 10px;
+    padding: 7px 15px;
+    border: none;
+    background-color: brown;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+
+
+    &:hover{
+        background-color: blue;
+    }
+`
+
+const LogoutButton = styled.div`
     margin: 20px;
     padding: 7px 15px;
     border: none;
@@ -46,12 +66,14 @@ const Button = styled.div`
 
 
     &:hover{
-        background-color: #03a83a;
+        background-color: blue;
     }
 `
- const Add = styled.div`
- 
- `
+
+  const User = styled.h4`
+     text-transform: uppercase;
+     color: brown;
+  `
 
 
 function Navbar() {
@@ -60,16 +82,12 @@ function Navbar() {
     const navigate = useNavigate()
     // const user =JSON.parse( localStorage.getItem("profile"));
 
+    const user = useSelector((state) => state.auth.user); 
 
-    const user = useSelector((state) => state.auth.user);
     console.log(user, "username is")
+    
 
-    const handleClick = (e) => {
-        e.preventDefault();
-
-    }
-
-    const handleLogOut = () => {
+    const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
         navigate("/");
       };
@@ -78,23 +96,41 @@ function Navbar() {
   return (
     <div className='container'>
     <Container>
+        <Link to='/'>
         <Logo>Libe</Logo>
+        </Link>
         
         <Navlinks>
+        {user && user.isAdmin && (
+            <>
             <Link to='/addbook'>
             <AddCircleSharpIcon style={{color: '#0972ab',marginTop:5, height:100,}}/>
             </Link>
+            <Users>Users</Users>
+            </>
+        )}
+        <Link to='/'>
             <Home>Home</Home>
+            </Link>
             <About>About</About>
             <Search>Search</Search>
 
-           { user ? ( <Link to='/'>
-            <Button >`${user.username}`</Button>
+         </Navlinks>
+         <Navlinks>
+
+           { user ? (
+            <>
+             <Link to='/'>
+            <User >{user.username}</User>
             </Link>
+            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+            </>
             )  :(
              <Link to='/login'>
-            <Button   onClick={handleLogOut}>Login</Button>
+            <Button  >Login</Button>
             </Link>)}
+
+         
         </Navlinks>
     </Container>
 

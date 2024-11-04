@@ -1,7 +1,7 @@
 import React, {  useEffect, useState } from 'react';
 import { TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { createBook, updateBook } from '../../actions/books';
 
@@ -22,7 +22,7 @@ function EditBook({book, setIsEditing}) {
     }
   }, [book]);
 
-
+  const user = useSelector((state) => state.auth.user);
 
   const handleChange = (e) => {
     
@@ -112,7 +112,7 @@ function EditBook({book, setIsEditing}) {
         </div>
 
       
-
+       
       <Button
         variant="contained"
         color="primary"
@@ -120,6 +120,7 @@ function EditBook({book, setIsEditing}) {
       >
        Update
       </Button>
+      
     </Box>
   );
 }

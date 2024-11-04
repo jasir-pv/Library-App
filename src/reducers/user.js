@@ -40,28 +40,31 @@
   
 //   export default userReducer;
 
-const initialState = {
-    user: null,
-    isFetching: false,
-    error: false,
-  };
+// const initialState = {
+//     user: null,
+//     isFetching: false,
+//     error: false,
+//     accessToken: null,
+//   };
   
-  const userReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'LOGIN_START':
-      case 'SIGNUP_START':
-        return { ...state, isFetching: true, error: false };
-      case 'LOGIN_SUCCESS':
-      case 'SIGNUP_SUCCESS':
-        return { ...state, user: action.payload, isFetching: false, error: false };
-      case 'LOGIN_FAILURE':
-      case 'SIGNUP_FAILURE':
-        return { ...state, isFetching: false, error: action.payload };
-      default:
-        return state;
-    }
-  };
+//   const userReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//       case 'LOGIN_START':
+//       case 'SIGNUP_START':
+//         return { ...state, isFetching: true, error: false };
+//       case 'LOGIN_SUCCESS':
+//       case 'SIGNUP_SUCCESS':
+//         return { ...state, user: action.payload.user, isFetching: false, error: false,accessToken: action.payload.accessToken };
+//       case 'LOGIN_FAILURE':
+//       case 'SIGNUP_FAILURE':
+//         return { ...state, isFetching: false, error: action.payload };
+//         case 'LOGOUT':
+//           return initialState;
+//         default:
+//         return state;
+//     }
+//   };
   
-  export default userReducer;
+//   export default userReducer;
   
   

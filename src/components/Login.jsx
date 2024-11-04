@@ -51,12 +51,9 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const user = null;
+
+  const user = useSelector((state) => state.auth.user);
   const { isFetching, error } = useSelector((state) => state.auth);
-
-
-  const state = useSelector((state) => state);
-console.log(state);
 
 
   // useEffect(() => {
@@ -65,19 +62,23 @@ console.log(state);
   //   }
   // }, [currentUser, navigate]);
 
+  // useEffect(() => {
+  //   if (user) {
+  //     // Run side-effect if user is already logged in
+  //     console.log('User is logged in');
+  //   }
+  // }, [user]);
+
   
     // const {isFetching, error} = useSelector((state) => state.userData);
 
-  const handleClick =(e)=>{
-    e.preventDefault()
-  
-    login(dispatch, { username, password });
-    navigate('/'); // Add navigation after login success
-  
-  }
-
-
-
+    const handleLogin = (e) => {
+      e.preventDefault();
+      login(dispatch, { username, password });
+      if (user) {
+        navigate('/');
+      }
+    };
 
 
   return (
@@ -111,7 +112,7 @@ console.log(state);
           variant="contained"
           color="primary"
           fullWidth
-          onClick={handleClick}
+          onClick={handleLogin}
 
         >
           Sign In
@@ -123,6 +124,7 @@ console.log(state);
      
       <Typography variant='a' style={{cursor:'pointer', color:'blue',}}> Forgot Password</Typography>
       </Bottom_Button>
+      {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
       </LoginForm>
     </LoginContainer>
   );

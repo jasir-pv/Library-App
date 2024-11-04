@@ -3,6 +3,7 @@ import { TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 import { createBook } from '../../actions/books';
+import Navbar from '../Navbar';
 
 
 function AddBook() {
@@ -38,6 +39,8 @@ function AddBook() {
   };
 
   return (
+    <>
+    <Navbar />
     <Box
       sx={{
         display: 'flex',
@@ -51,6 +54,7 @@ function AddBook() {
         borderRadius: 2,
       }}
     >
+    
       <Typography variant="h5" align="center">
         Add Book
       </Typography>
@@ -116,6 +120,7 @@ function AddBook() {
         Add Book
       </Button>
     </Box>
+    </>
   );
 }
 

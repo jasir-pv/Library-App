@@ -14,10 +14,10 @@ API.interceptors.request.use((request) => {
  export const updateBook = (id,updatedBook)=> axios.patch(`${url}/${id}`,updatedBook)
 
 
- export const signUp = (formData) => API.post("/user/signup", formData);
- export const login = (formData) => API.post("/user/signin", formData);
- export const fetchUsers = () => API.get("/user");
- export const deleteUser = (id) => API.delete(`/user/${id}`);
+//  export const signUp = (formData) => API.post("/user/signup", formData);
+//  export const login = (formData) => API.post("/user/signin", formData);
+//  export const fetchUsers = () => API.get("/user");
+//  export const deleteUser = (id) => API.delete(`/user/${id}`);
 
  
 

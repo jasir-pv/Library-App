@@ -49,9 +49,18 @@ function Books({book, setCurrentId}) {
            }} 
             alt="Img" />
 
-            <h5>{book.title}</h5>
-          <p>{book.author}</p>
-          <p>{book.category}</p>
+            <h4>{book.title}</h4>
+          <p style={{
+            fontFamily:'sans-serif',
+            fontSize: 13,
+            marginTop:5,
+          }}>{book.author}</p>
+          <p style={{
+            fontFamily:'sans-serif',
+            fontSize: 13,
+            marginTop:5,
+          }}
+          >{book.category}</p>
             <p>{book.availablity}</p>      
            </Wrapper>
      ))}
