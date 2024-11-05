@@ -47,13 +47,14 @@ const CheckIn = styled.button`
       padding: 15px 0;
       border: none;
       width: 100%;
-     background-color: black;
+      background-color: ${({ isAvailable }) => (isAvailable ? 'black' : '#40e643')};
+      transition: background-color 0.3s ease;
       color: white;
       font-weight: 600;
       border-radius: 10px;
      cursor: pointer;
      &:hover{
-      background-color: #2c2e2c;
+      background-color: ${({ isAvailable }) => (isAvailable ? '#2c2e2c' : '#02a810')};
       transition: ease 0.3s;
      }
 `
@@ -142,15 +143,23 @@ function BookDetails() {
 
 
   const handleCheckInOut = async () => {
-    if (localAvailability) {
-      await dispatch(checkout(book._id)); // Mark as checked out
-    } else {
-      await dispatch(checkin(book._id)); // Mark as checked in
+    try {
+      if (localAvailability) {
+        await dispatch(checkout(book._id)); // Attempt to check out
+        alert("Book Checked Out Successfully!"); // Success message
+      } else {
+        await dispatch(checkin(book._id)); // Attempt to check in
+        alert("Book Checked In Successfully!"); // Success message
+      }
+  
+      // Update local availability state only if the action succeeds
+      setLocalAvailability(!localAvailability);
+    } catch (error) {
+      // Handle the failure case with an alert or error display
+      alert("Failed to change book status. Please try again.");
     }
-
-    // Update local availability state after dispatch completes
-    setLocalAvailability(!localAvailability);
   };
+  
   return (
     
     <Container>

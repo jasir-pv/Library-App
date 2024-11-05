@@ -42,16 +42,16 @@ export const updateBook= (id, book) => async (dispatch)=>{
 }
 
 
-export const checkin = (id) => async (dispatch)=>{
-    try{
-        const {data} =await api.checkin(id)
-        dispatch({type: 'CHECKIN_BOOK', payload:data})
-        alert ('Book Checked in Succesfully!')
-    } catch (error){
-        dispatch ({ type: BOOKS_ERROR, payload: error.message})
-        alert('Failed to Check in the Book')
+export const checkin = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.checkin(id); // Make sure api.checkin points to the correct endpoint
+        dispatch({ type: 'CHECKIN_BOOK', payload: data });
+        alert('Book Checked in Successfully!');
+    } catch (error) {
+        dispatch({ type: BOOKS_ERROR, payload: error.message || "Check-in error" });
+        alert('Failed to Check in the Book');
     }
-}
+};
 
 export const checkout = (id) => async (dispatch)=>{
     try{
