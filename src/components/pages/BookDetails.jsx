@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Navbar from '../Navbar';
-import { deleteBook, updateBook } from '../../actions/books';
+import { checkin, checkout, deleteBook, updateBook } from '../../actions/books';
 import EditBook from './EditBook';
 
 const Container = styled.div`
@@ -107,41 +107,16 @@ function BookDetails() {
   const book = useSelector((state) =>
     state.books.find((book) => book._id === id || book.id === id)
   );
+
   const [isEditing, setIsEditing] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   title: 'book.title',
-  //   author: '',
-  //   category: '',
-  //   availability: '',
-  //   selectedFile: ''
-  // });
+  const [localAvailability, setLocalAvailability] = useState(book?.isAvailable);
 
-  // Load book data into form when entering edit mode
-  // useEffect(() => {
-  //   if (book && isEditing) {
-  //     setFormData({
-  //       title: book.title,
-  //       author: book.author,
-  //       category: book.category,
-  //       availability: book.availability,
-  //       selectedFile: book.selectedFile
-  //     });
-  //   }
-  // }, [book, isEditing]);
-
-  // Toggle edit mode and pre-fill form with book data
-
-
-  // Handle form input changes
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
 
   const user = useSelector((state)=> state.auth.user)
 
   useEffect(() => {
-    if (!book) {
-      // Optionally fetch the book if it's not already in the state
+    if (book) {
+      setLocalAvailability(book.isAvailable);
     }
   }, [book]);
 
@@ -153,7 +128,6 @@ function BookDetails() {
   }else{
     alert("Only Admins Can Edit the Book")
   }
-    // setShowAddBook((prev) => !prev); // Toggle visibility of AddBook component
   };
 
 
@@ -165,11 +139,18 @@ function BookDetails() {
     alert( "Only Admins Can Delete the Book")
   }
   }
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(updateBook(id, formData));
-  //   setIsEditing(false); // Exit edit mode after updating
-  // };
+
+
+  const handleCheckInOut = async () => {
+    if (localAvailability) {
+      await dispatch(checkout(book._id)); // Mark as checked out
+    } else {
+      await dispatch(checkin(book._id)); // Mark as checked in
+    }
+
+    // Update local availability state after dispatch completes
+    setLocalAvailability(!localAvailability);
+  };
   return (
     
     <Container>
@@ -187,12 +168,14 @@ function BookDetails() {
       <h2>{book.title}</h2>
       <p><strong>Author:</strong> {book.author}</p>
       <p><strong>Category:</strong> {book.category}</p>
-      <p><strong>Availability:</strong> {book.availablity}</p>
+      <p><strong>Availability:</strong> {localAvailability ? "Available" : "Not Available"}</p>
       <p><strong>Description:</strong> {book.description || 'No description available.'}</p>
       <Buttons>
       <Edit onClick={handleEditClick} >Edit</Edit>
       <Delete  onClick={handleDeleteClick}>Delete</Delete>
-      <CheckIn>Check in</CheckIn> 
+      <CheckIn onClick={handleCheckInOut}>
+              {localAvailability ? "Check Out" : "Check In"}
+            </CheckIn>
       </Buttons>
       </InfoContainer>
       </Details>

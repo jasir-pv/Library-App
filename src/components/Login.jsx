@@ -56,21 +56,6 @@ function Login() {
   const { isFetching, error } = useSelector((state) => state.auth);
 
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     navigate('/userpage'); // Replace '/userpage' with the path to your user page
-  //   }
-  // }, [currentUser, navigate]);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     // Run side-effect if user is already logged in
-  //     console.log('User is logged in');
-  //   }
-  // }, [user]);
-
-  
-    // const {isFetching, error} = useSelector((state) => state.userData);
 
     const handleLogin = (e) => {
       e.preventDefault();

@@ -1,43 +1,10 @@
-// SignUp.js
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Box } from '@mui/material';
-import { styled } from '@mui/system';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Container, TextField, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { signup } from '../actions/auth';
-import { useDispatch } from 'react-redux';
-
-const SignUpContainer = styled(Container)({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100vh',
-  backgroundColor: '#f5f5f5',
-});
-
-const IconWrapper = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#4caf50',
-  borderRadius: '50%',
-  width: 60,
-  height: 60,
-  marginBottom: '1rem',
-  color: 'white',
-});
-
-const SignUpForm = styled('form')({
-  width: '100%',
-  maxWidth: 400,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1rem',
-});
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../actions/auth.js';
 
 function SignUp() {
-
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -45,6 +12,7 @@ function SignUp() {
     confirmPassword: '',
   });
   const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,77 +20,26 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
-
-    signup(dispatch, {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    });
+    dispatch(signup(formData));
   };
 
   return (
-    <>
-    <SignUpContainer maxWidth="xs">
-      <IconWrapper>
-        <PersonAddIcon fontSize="large" />
-      </IconWrapper>
-      <Typography variant="h5" component="h1" gutterBottom>
-        Sign Up
-      </Typography>
-      <SignUpForm>
-        <TextField
-          label="username"
-          name="username"
-          variant="outlined"
-          value={formData.username} 
-          fullWidth
-          required
-          onChange={handleChange}
-        />
-        <TextField
-          label="Email Address"
-           name="email"
-           value={formData.email}        
-          variant="outlined"
-          fullWidth
-          required
-          onChange={handleChange}
-        />
-        <TextField
-          label="Password"
-            name="password"
-            value={formData.password} 
-          variant="outlined"
-          type="password"
-          fullWidth
-          required
-          onChange={handleChange}
-        />
-        <TextField
-          label="Confirm Password"
-           name="confirmPassword"
-           value={formData.confirmPassword}
-          variant="outlined"
-          type="password"
-          fullWidth
-          required
-          onChange={handleChange}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={handleSubmit}
-        >
-          Sign Up
+    <Container maxWidth="xs">
+      <Typography variant="h5">Sign Up</Typography>
+      <form onSubmit={handleSubmit}>
+        <TextField label="Username" name="username" value={formData.username} onChange={handleChange} fullWidth />
+        <TextField label="Email" name="email" value={formData.email} onChange={handleChange} fullWidth />
+        <TextField label="Password" name="password" type="password" value={formData.password} onChange={handleChange} fullWidth />
+        <TextField label="Confirm Password" name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} fullWidth />
+        <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
         </Button>
-      </SignUpForm>
-    <Typography> <Link to="/login"> Already Created Account</Link></Typography>
-     
-    </SignUpContainer>
-    </>
+      </form>
+      {error && <Typography color="error">{error}</Typography>}
+      <Typography>
+        <Link to="/login">Already have an account? Login</Link>
+      </Typography>
+    </Container>
   );
 }
 

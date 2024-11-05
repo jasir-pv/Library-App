@@ -1,0 +1,32 @@
+.userListUser {
+    font-weight: bold;
+    color: #333;
+}
+
+.userListImg {
+    transition: transform 0.3s;
+}
+
+.userListImg:hover {
+    transform: scale(1.1);
+}
+
+.userListEdit {
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.userListEdit:hover {
+    background-color: #115293;
+}
+
+.userListDelete {
+    transition: color 0.2s;
+}
+
+.userListDelete:hover {
+    color: #ff0000;
+}

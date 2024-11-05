@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BookDetails from './components/pages/BookDetails';
 import AddBook from './components/pages/AddBook';
 import { useEffect } from 'react';
+import UsersList from './components/pages/UsersList';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/book/:id" element={<BookDetails />} />
           <Route path="/addbook" element={<AddBook />} />
+          <Route path="/userslist" element={<UsersList />} />
         </Routes>
       </BrowserRouter>
     </div>

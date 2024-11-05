@@ -1,8 +1,6 @@
 import { Button } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import MoreHoriz from '@mui/icons-material/MoreHoriz' 
-import MoreVertSharpIcon from '@mui/icons-material/MoreVertSharp';
 import { getBooks } from '../actions/books';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +22,7 @@ const Wrapper = styled.div`
 `
  
 
-function Books({book, setCurrentId}) {
+function Books() {
 
   const books = useSelector((state)=> state.books)
 
@@ -61,7 +59,7 @@ function Books({book, setCurrentId}) {
             marginTop:5,
           }}
           >{book.category}</p>
-            <p>{book.availablity}</p>      
+            <p>{book.isAvailable}</p>      
            </Wrapper>
      ))}
     </div>

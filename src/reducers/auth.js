@@ -33,41 +33,75 @@ import axios from "axios";
 
 
 
-const initialState = {
-    user: null,
-    isFetching: false,
-    error: false,
-    accessToken: null,
-  };
-  
-//   const authReducer = (state = initialState, action) => {
-//     switch (action.type) {
-//       case 'LOGIN_START':
-//         return { ...state, isFetching: true, error: false };
-//       case 'LOGIN_SUCCESS':
-//         return { ...state, user: action.payload, isFetching: false };
-//       case 'LOGIN_FAILURE':
-//         return { ...state, isFetching: false, error: true };
-//       default:
-//         return state;
-//     }
+// const initialState = {
+//     user: null,
+//     isFetching: false,
+//     error: false,
+//     accessToken: null,
 //   };
+
+
+// export const authReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case 'LOGIN_REQUEST':
+//       return { ...state, loading: true, error: null };
+//     case 'LOGIN_SUCCESS':
+//       return { ...state, loading: false, user: action.payload.user, accessToken: action.payload.accessToken };
+//     case 'LOGIN_FAILURE':
+//       return { ...state, loading: false, error: action.payload }; // Update error state
+//     case 'LOGOUT':
+//       return initialState;
+//     default:
+//       return state;
+//   }
+// };
+  
+  
+//   export default authReducer;
+  
+// ------------------------------------------------
+
+
+// reducers/authReducer.js
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGOUT,
+} from "../actions/types";
+
+const initialState = {
+  user: null,
+  accessToken: null,
+  loading: false,
+  error: null,
+};
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_REQUEST':
+    case LOGIN_REQUEST:
       return { ...state, loading: true, error: null };
-    case 'LOGIN_SUCCESS':
-      return { ...state, loading: false, user: action.payload.user, accessToken: action.payload.accessToken };
-    case 'LOGIN_FAILURE':
-      return { ...state, loading: false, error: action.payload }; // Update error state
-    case 'LOGOUT':
+    case LOGIN_SUCCESS:
+      return { 
+        ...state, 
+        loading: false, 
+        user: action.payload.user, 
+        accessToken: action.payload.accessToken, 
+        error: null 
+      };
+    case LOGIN_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case SIGNUP_SUCCESS:
+      return { ...state, loading: false, error: null }; // You can add a flag to show successful signup if needed
+    case SIGNUP_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case LOGOUT:
       return initialState;
     default:
       return state;
   }
 };
-  
-  
-  export default authReducer; // Make sure this is exported as default
-  
+
+export default authReducer;

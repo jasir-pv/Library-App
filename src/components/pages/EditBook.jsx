@@ -3,7 +3,7 @@ import { TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createBook, updateBook } from '../../actions/books';
+import { updateBook } from '../../actions/books';
 
 
 function EditBook({book, setIsEditing}) {
@@ -86,16 +86,16 @@ function EditBook({book, setIsEditing}) {
 
 
 <TextField
-        label="Availability"
-        name="availability"
-        value={bookData.availability}
-        onChange={handleChange}
-        select
-        fullWidth
-      >
-        <MenuItem value="Available">Available</MenuItem>
-        <MenuItem value="Not Available">Not Available</MenuItem>
-      </TextField>
+  label="Availability"
+  name="isAvailable" // Update to use isAvailable directly
+  value={bookData.isAvailable ? 'Available' : 'Not Available'}
+  onChange={(e) => setBookData({ ...bookData, isAvailable: e.target.value === 'Available' })}
+  select
+  fullWidth
+>
+  <MenuItem value={true}>Available</MenuItem>
+  <MenuItem value={false}>Not Available</MenuItem>
+</TextField>
 
       <div>
         <FileBase

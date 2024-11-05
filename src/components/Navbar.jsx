@@ -44,14 +44,28 @@ const Button = styled.div`
     margin: 10px;
     padding: 7px 15px;
     border: none;
-    background-color: brown;
+    background-color: #f5ca1d;
     color: white;
     font-weight: 600;
     border-radius: 10px;
 
 
     &:hover{
-        background-color: blue;
+        background-color: #04857a;
+    }
+`
+const AddBook = styled.div`
+    margin: 10px;
+    padding: 7px 15px;
+    border: none;
+    background-color: #ad8d0a;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+
+
+    &:hover{
+        background-color: #04857a;
     }
 `
 
@@ -59,14 +73,14 @@ const LogoutButton = styled.div`
     margin: 20px;
     padding: 7px 15px;
     border: none;
-    background-color: brown;
+    background-color: #024f49;
     color: white;
     font-weight: 600;
     border-radius: 10px;
 
 
     &:hover{
-        background-color: blue;
+        background-color: #04857a;
     }
 `
 
@@ -84,7 +98,6 @@ function Navbar() {
 
     const user = useSelector((state) => state.auth.user); 
 
-    console.log(user, "username is")
     
 
     const handleLogout = () => {
@@ -103,10 +116,10 @@ function Navbar() {
         <Navlinks>
         {user && user.isAdmin && (
             <>
-            <Link to='/addbook'>
-            <AddCircleSharpIcon style={{color: '#0972ab',marginTop:5, height:100,}}/>
-            </Link>
+           
+            <Link to='/userslist'>
             <Users>Users</Users>
+            </Link>
             </>
         )}
         <Link to='/'>
@@ -124,6 +137,9 @@ function Navbar() {
             <User >{user.username}</User>
             </Link>
             <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+            <Link to='/addbook'>
+           <AddBook>Add Book</AddBook>
+            </Link>
             </>
             )  :(
              <Link to='/login'>

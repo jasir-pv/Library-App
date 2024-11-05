@@ -1,5 +1,7 @@
 import * as api from '../api'
 
+import { CHECKIN_BOOK, CHECKOUT_BOOK, BOOKS_ERROR } from './types';
+
 
 export const getBooks = ()=> async (dispatch) =>{
 
@@ -38,3 +40,27 @@ export const updateBook= (id, book) => async (dispatch)=>{
         console.log(error)
     }
 }
+
+
+export const checkin = (id) => async (dispatch)=>{
+    try{
+        const {data} =await api.checkin(id)
+        dispatch({type: 'CHECKIN_BOOK', payload:data})
+        alert ('Book Checked in Succesfully!')
+    } catch (error){
+        dispatch ({ type: BOOKS_ERROR, payload: error.message})
+        alert('Failed to Check in the Book')
+    }
+}
+
+export const checkout = (id) => async (dispatch)=>{
+    try{
+        const {data} =await api.checkout(id)
+        dispatch({type: 'CHECKOUT_BOOK', payload:data})
+        alert ('Book Checked out Succesfully!')
+    } catch (error){
+        dispatch ({ type: BOOKS_ERROR, payload: error.message})
+        alert('Failed to Check out the Book')
+    }
+}
+

@@ -1,31 +1,37 @@
 import axios from "axios";
 
-const url = 'http://localhost:5000/books'
+
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
+const getToken = () => localStorage.getItem("token");
+
 API.interceptors.request.use((request) => {
+  const token = getToken();
+  if (token) {
+    request.headers["token"] = `Bearer ${token}`;
+  }
   console.log("Starting Request", request);
   return request;
 });
 
- export const fetchBooks = ()=> axios.get(url)
- export const createBook = (newBook) => axios.post(url, newBook)
- export const deleteBook = (id) => axios.delete(`${url}/${id}`);
- export const updateBook = (id,updatedBook)=> axios.patch(`${url}/${id}`,updatedBook)
+ export const fetchBooks = ()=> () => API.get("/books");
+ export const createBook = (newBook) => API.post('/books', newBook)
+ export const deleteBook = (id) => API.delete(`/books/${id}`);
+ export const updateBook = (id,updatedBook)=> API.patch(`/books/${id}`,updatedBook)
 
 
-//  export const signUp = (formData) => API.post("/user/signup", formData);
-//  export const login = (formData) => API.post("/user/signin", formData);
-//  export const fetchUsers = () => API.get("/user");
-//  export const deleteUser = (id) => API.delete(`/user/${id}`);
-
+ export const signup = (formData) => API.post("/auth/register", formData);
+ export const login = (formData) => API.post("/auth/login", formData);
  
 
-const BASE_URL = 'http://localhost:5000/';
-const TOKEN = localStorage.getItem("token");
 
-export const publicRequest = axios.create({ baseURL: BASE_URL });
-export const userRequest = axios.create({
-  baseURL: BASE_URL,
-  headers: { header: `Bearer ${TOKEN}` },
-});
+ export const fetchUsers = () => API.get("/users");
+ export const deleteUser = (id) => API.delete(`/users/${id}`);
+ export const editUser = (id,updatedUser)=> API.patch(`/users/${id}`,updatedUser)
+
+ export const checkin = (id)=> API.patch(`/books/${id}/checkin`)
+ export const checkout = (id)=> API.patch(`/books/${id}/checkout`)
+
+
+
+ 
