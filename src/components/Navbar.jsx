@@ -9,8 +9,8 @@ const Container = styled.div`
     width: 100%;
     height: 100px;
     background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(1,222,167,0.4290966386554622) 60%, rgba(0,242,202,1) 100%);
-    display: flex;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0.4290966386554622) 100%);
+      display: flex;
     align-items: center;
     justify-content: space-around;
 `
@@ -136,16 +136,18 @@ function Navbar() {
              <Link to='/'>
             <User >{user.username}</User>
             </Link>
-            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
-            <Link to='/addbook'>
-           <AddBook>Add Book</AddBook>
-            </Link>
+            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>,
+            
             </>
             )  :(
              <Link to='/login'>
             <Button  >Login</Button>
             </Link>)}
-
+            {user && user.isAdmin && (
+            <Link to='/addbook'>
+           <AddBook>Add Book</AddBook>
+            </Link>
+        )}
          
         </Navlinks>
     </Container>

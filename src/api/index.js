@@ -22,7 +22,7 @@ API.interceptors.request.use((request) => {
 
  export const signup = (formData) => API.post("/auth/register", formData);
  export const login = (formData) => API.post("/auth/login", formData);
- 
+ export const verifyToken = (token) => API.get("/auth/verifyToken", { headers: { token: `Bearer ${token}` } });
 
 
  export const fetchUsers = () => API.get("/users");

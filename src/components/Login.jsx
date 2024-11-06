@@ -57,13 +57,16 @@ function Login() {
 
 
 
-    const handleLogin = (e) => {
-      e.preventDefault();
-      login(dispatch, { username, password });
-      if (user) {
-        navigate('/');
-      }
-    };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({ username, password }));
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/'); // Redirect on successful login
+    }
+  }, [user, navigate]);
 
 
   return (

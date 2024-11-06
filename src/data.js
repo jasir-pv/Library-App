@@ -29,3 +29,26 @@ export const userRows = [
     { id: 8, username: 'Frances', avatar: 'https://avatars.githubusercontent.com/u/106402545?v=4', email: "jasir@gmail.com", status:"active", transaction:"$120.00" },
     { id: 9, username: 'Roxie', avatar: 'https://avatars.githubusercontent.com/u/106402545?v=4', email: "jasir@gmail.com", status:"active", transaction:"$120.00" },
   ];
+
+  export const sliderItems=[{
+    id:1,
+    img:"./images/book1.png",
+    title:"Find Your Books",
+    desc:"The Library is an Arena of Possibility, opening both a window into the soul and a door onto the world",
+    bg: "#ffff",
+    },
+    {
+        id:2,
+        img:"./images/book1.png",
+        title:"Find Your Books",
+        desc:"The Library is an Arena of Possibility, opening both a window into the soul and a door onto the world",
+        bg: "#fcd4f2",
+    },
+    {
+        id:2,
+        img:"./images/book1.png",
+        title:"Find Your Books",
+        desc:"The Library is an Arena of Possibility, opening both a window into the soul and a door onto the world",
+        bg: "#fcd4f2",
+    }
+]

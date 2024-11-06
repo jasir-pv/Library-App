@@ -2,11 +2,15 @@ import React, {  useEffect, useState } from 'react';
 import { TextField, Button, MenuItem, Typography, Box } from '@mui/material';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { updateBook } from '../../actions/books';
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 function EditBook({book, setIsEditing}) {
+
+  const navigate = useNavigate()
     const dispatch = useDispatch()
   const [bookData, setBookData] = useState({
     title: '',
@@ -40,6 +44,7 @@ function EditBook({book, setIsEditing}) {
 
     dispatch(updateBook(book._id,bookData))
     setIsEditing(false);
+    navigate(`/book/${book._id}`)
   };
 
   return (
