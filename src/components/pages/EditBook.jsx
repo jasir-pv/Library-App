@@ -92,7 +92,7 @@ function EditBook({book, setIsEditing}) {
 
 <TextField
   label="Availability"
-  name="isAvailable" // Update to use isAvailable directly
+  name="isAvailable"
   value={bookData.isAvailable ? 'Available' : 'Not Available'}
   onChange={(e) => setBookData({ ...bookData, isAvailable: e.target.value === 'Available' })}
   select

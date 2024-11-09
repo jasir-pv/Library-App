@@ -1,7 +1,7 @@
 import { Button, Select, MenuItem } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBooks } from '../actions/books';
+import { getBooks } from '../actions/books.js';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,10 +13,12 @@ const Wrapper = styled.div`
     padding-top: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    transition: ease 0.3s;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
     &:hover {
       background-color: #a69e9d;
-      transition: ease 0.3s;
+      transform: scale(1.03); /* Slight zoom-in on hover */
+       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Darker shadow on hover */
     }
 `;
 
@@ -39,22 +41,29 @@ function Books() {
     setSelectedCategory(event.target.value);
   };
 
-  // Filter books based on the selected category
+ 
   const filteredBooks = selectedCategory === 'All'
     ? books
     : books.filter((book) => book.category === selectedCategory);
-
+    
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
       <div style={{ marginBottom: 20,}}>
-        <Select value={selectedCategory} onChange={handleCategoryChange}>
+        <Select
+            sx={{
+    border: 'none',
+    outline: 'none',
+    '& fieldset': { border: 'none' }, // Removes the default border around the dropdown
+    '&:focus-visible': { outline: 'none' } // Removes focus outline
+  }}
+         value={selectedCategory} onChange={handleCategoryChange}>
           <MenuItem value="All">All Categories</MenuItem>
           <MenuItem value="Fiction">Fiction</MenuItem>
           <MenuItem value="Non-Fiction">Non-Fiction</MenuItem>
           <MenuItem value="Science">Science</MenuItem>
           <MenuItem value="Novel">Novel</MenuItem>
           <MenuItem value="Biography">Biography</MenuItem>
-          {/* Add more categories as needed */}
+         
         </Select>
       </div>
 

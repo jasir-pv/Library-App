@@ -2,7 +2,6 @@ import styled from "styled-components"
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { useState } from "react";
-import {sliderItems} from "../data"
 import { mobile } from '../responsive';
 import { useSelector } from "react-redux";
 
@@ -56,12 +55,20 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
     height: 90%; 
     margin: 70px 0 0 70px;
+    display: flex;
 
 
 `
 const Image = styled.img`
     height: 90%;
     margin-top: 2px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+    &:hover {
+      background-color: #a69e9d;
+      transform: scale(1.05); 
+       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); 
+    }
 `
 const LatestTitle = styled.p`
     font-size: 16px;
@@ -76,8 +83,12 @@ const Slider = () => {
 
   const [slideIndex, setSliderIndex] = useState(0)
 
-  const books = useSelector((state) => state.books);
+const books = useSelector((state) => state.books);
+
+
   const latestBooks = books.slice(-4);
+
+
 
    const handleClick =(direction)=> {
     
@@ -99,6 +110,7 @@ const Slider = () => {
         <Slide>
           <ImgContainer>
             <Image src={item.selectedFile}/>
+
           </ImgContainer>
 
           </Slide>

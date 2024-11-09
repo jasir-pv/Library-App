@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../actions/auth.js';
 
+
 function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: '', 
   });
   const dispatch = useDispatch();
   const { error, loading } = useSelector((state) => state.auth);

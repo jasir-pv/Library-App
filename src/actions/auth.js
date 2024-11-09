@@ -88,6 +88,7 @@ export const login = (formData) => async (dispatch) => {
 export const signup = (formData) => async (dispatch) => {
   try {
     const { data } = await api.signup(formData);
+
     dispatch({ 
       type: SIGNUP_SUCCESS,
       payload: data

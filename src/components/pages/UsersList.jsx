@@ -12,7 +12,7 @@ function UserList() {
   const [editableUser, setEditableUser] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchUsers()); // Fetch users when component mounts
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   const handleDelete = (id) => {
@@ -32,54 +32,72 @@ function UserList() {
 
   return (
     <>
-
-    <Navbar/>
-
-    <TableContainer component={Paper} style={{marginTop:50, padding:50}}>
-      <Table>
-        <TableHead>
-          <TableRow>
-          
-            <TableCell>Username</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users && users.length > 0 ? (
-            users.map((user) => (
-              <TableRow key={user._id || user.id}>
-                
-                <TableCell>
-                  {editMode && editableUser && editableUser._id === user._id ? (
-                    <input
-                      type="text"
-                      value={editableUser.username}
-                      onChange={(e) => setEditableUser({ ...editableUser, username: e.target.value })}
-                    />
-                  ) : (
-                    user.username
-                  )}
-                </TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
-                  <Button color="primary" onClick={() => handleEditClick(user)}>Edit</Button>
-                  <Button color="secondary" onClick={() => handleDelete(user._id || user.id)}>Delete</Button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
+      <Navbar />
+      <TableContainer component={Paper} style={{ marginTop: 50, padding: 50 }}>
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={4} align="center">No users found</TableCell>
+              <TableCell>Username</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Password</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      {editMode && (
-        <Button color="primary" onClick={handleSave}>Save</Button>
-      )}
-    </TableContainer>
-
+          </TableHead>
+          <TableBody>
+            {users && users.length > 0 ? (
+              users.map((user) => (
+                <TableRow key={user._id || user.id}>
+                  <TableCell>
+                    {editMode && editableUser && editableUser._id === user._id ? (
+                      <input
+                        type="text"
+                        value={editableUser.username}
+                        onChange={(e) => setEditableUser({ ...editableUser, username: e.target.value })}
+                      />
+                    ) : (
+                      user.username
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {editMode && editableUser && editableUser._id === user._id ? (
+                      <input
+                        type="email"
+                        value={editableUser.email}
+                        onChange={(e) => setEditableUser({ ...editableUser, email: e.target.value })}
+                      />
+                    ) : (
+                      user.email
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {editMode && editableUser && editableUser._id === user._id ? (
+                      <input
+                        type="password"
+                        value={editableUser.password}
+                        onChange={(e) => setEditableUser({ ...editableUser, password: e.target.value })}
+                      />
+                    ) : (
+                      '••••••••'  // Mask password display
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <Button color="primary" onClick={() => handleEditClick(user)}>Edit</Button>
+                    <Button color="secondary" onClick={() => handleDelete(user._id || user.id)}>Delete</Button>
+                    {editMode && (
+                     <Button color="primary" onClick={handleSave}>Save</Button>
+                       )}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={4} align="center">No users found</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+       
+      </TableContainer>
     </>
   );
 }

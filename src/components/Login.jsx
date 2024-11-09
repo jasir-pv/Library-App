@@ -64,9 +64,10 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate('/'); // Redirect on successful login
+      navigate('/'); 
     }
   }, [user, navigate]);
+  
 
 
   return (

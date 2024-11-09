@@ -6,6 +6,7 @@ import { FETCH_USERS, DELETE_USER, EDIT_USER, USERS_ERROR } from './types';
 export const fetchUsers = () => async (dispatch) => {
   try {
     const { data } = await api.fetchUsers();
+
     dispatch({ type: FETCH_USERS, payload: data });
   } catch (error) {
     dispatch({ type: USERS_ERROR, payload: error.message });

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';import { Link, useNavigate } from 'react-router-dom';
-import { lightBlue } from '@mui/material/colors';
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { fetchBooks } from '../api';
+import { getBooks,getBooksBySearch } from '../actions/books';
+
 
 
 const Container = styled.div`
@@ -10,7 +13,7 @@ const Container = styled.div`
     height: 100px;
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0.4290966386554622) 100%);
-      display: flex;
+    display: flex;
     align-items: center;
     justify-content: space-around;
 `
@@ -37,9 +40,30 @@ const Home = styled.li`
 const About = styled.li`
     margin: 10px;
 `
-const Search = styled.li`
-    margin: 10px;
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  background-color: #e0e0de;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+
+`;
+
+const SearchInput = styled.input`
+  padding: 10px;
+  font-size: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background-color: #e0e0de;
+`;
+
+const SearchButton =styled.div`
+    cursor: pointer;
 `
+
+
 const Button = styled.div`
     margin: 10px;
     padding: 7px 15px;
@@ -89,22 +113,52 @@ const LogoutButton = styled.div`
      color: brown;
   `
 
+  function useQuery() {
+      return new URLSearchParams(useLocation().search)
+  }
+
 
 function Navbar() {
    
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const user =JSON.parse( localStorage.getItem("profile"));
+    const query = useQuery()
+
+
+    const page = query.get('page') || 1
+    const searchQuery = query.get('searchQuery')
 
     const user = useSelector((state) => state.auth.user); 
+    const books = useSelector((state) => state.books);
 
-    
+
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
         navigate("/");
       };
   
+
+     
+
+  
+    const handleSearch = () => {
+      
+      if(searchTerm.trim()){
+          dispatch(getBooksBySearch({ searchTerm}))
+          navigate(`/books/search`);
+      }else{
+        navigate('/')
+      }
+     
+    };
+
+    const handleKeyPress = (e) =>{
+      if(e.keyCode === 13) {
+          handleSearch()
+      }
+    }
 
   return (
     <div className='container'>
@@ -120,13 +174,26 @@ function Navbar() {
             <Link to='/userslist'>
             <Users>Users</Users>
             </Link>
+            <Link to='/checkedout-books'>
+            <Users>Checked Out</Users>
+            </Link>
             </>
         )}
         <Link to='/'>
             <Home>Home</Home>
             </Link>
             <About>About</About>
-            <Search>Search</Search>
+            <SearchContainer>
+        <SearchInput 
+          type="text" value={searchTerm}
+          onKeyDown={handleKeyPress}
+          placeholder="Search by title or author" 
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <SearchButton onClick={handleSearch}>
+        <SearchOutlinedIcon  />
+        </SearchButton>
+      </SearchContainer>
 
          </Navlinks>
          <Navlinks>

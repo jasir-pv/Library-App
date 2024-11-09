@@ -54,7 +54,6 @@ const CheckIn = styled.button`
       border-radius: 10px;
      cursor: pointer;
      &:hover{
-      background-color: ${({ isAvailable }) => (isAvailable ? '#2c2e2c' : '#02a810')};
       transition: ease 0.3s;
      }
 `
@@ -102,18 +101,15 @@ function BookDetails() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [showAddBook, setShowAddBook] = useState(false);
 
   const { id } = useParams();
-  const book = useSelector((state) =>
-    state.books.find((book) => book._id === id || book.id === id)
-  );
-
-  const [isEditing, setIsEditing] = useState(false);
+  const book = useSelector((state) => state.books.find((book) => book._id === id));
+  const user = useSelector((state) => state.auth.user);
   const [localAvailability, setLocalAvailability] = useState(book?.isAvailable);
 
+  const [isEditing, setIsEditing] = useState(false);
 
-  const user = useSelector((state)=> state.auth.user)
+
 
   useEffect(() => {
     if (book) {
@@ -143,23 +139,20 @@ function BookDetails() {
 
 
   const handleCheckInOut = async () => {
+    if (!user) return alert('Please log in first');
+    
     try {
-      if (localAvailability) {
-        await dispatch(checkout(book._id)); // Attempt to check out
-        alert("Book Checked Out Successfully!"); // Success message
-      } else {
-        await dispatch(checkin(book._id)); // Attempt to check in
-        alert("Book Checked In Successfully!"); // Success message
-      }
-  
-      // Update local availability state only if the action succeeds
-      setLocalAvailability(!localAvailability);
+        if (localAvailability) {
+            await dispatch(checkout(id, user._id));
+            setLocalAvailability(false);
+        } else {
+            await dispatch(checkin(id, user._id));
+            setLocalAvailability(true);
+        }
     } catch (error) {
-      // Handle the failure case with an alert or error display
-      alert("Failed to change book status. Please try again.");
+        alert("Failed to change book status.");
     }
-  };
-  
+};
   return (
     
     <Container>

@@ -8,6 +8,9 @@ import BookDetails from './components/pages/BookDetails';
 import AddBook from './components/pages/AddBook';
 import { useEffect } from 'react';
 import UsersList from './components/pages/UsersList';
+import { getBooks } from './actions/books';
+import SearchResults from './components/SearchResults';
+import CheckedOutBooks from './components/CheckedOutBooks';
 
 
 function App() {
@@ -15,8 +18,10 @@ function App() {
  const dispatch = useDispatch();
  
 
-
-
+useEffect(()=>{
+    dispatch(getBooks())
+},[dispatch])    
+ 
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,6 +32,8 @@ function App() {
           <Route path="/book/:id" element={<BookDetails />} />
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/userslist" element={<UsersList />} />
+          <Route path="/books/search" element={<SearchResults />} />
+          <Route path="/checkedout-books" element={<CheckedOutBooks />} />
         </Routes>
       </BrowserRouter>
     </div>

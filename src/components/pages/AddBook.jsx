@@ -15,7 +15,7 @@ function AddBook() {
     title: '',
     author: '',
     category: 'All',  // Default category
-    availability: 'Available',  // Default availability
+    isAvailabile: 'Available',  // Default availability
     selectedFile: null,
   });
 
@@ -79,13 +79,13 @@ function AddBook() {
           <MenuItem value="Science">Science</MenuItem>
           <MenuItem value="Novel">Novel</MenuItem>
           <MenuItem value="Biography">Biography</MenuItem>
-          {/* Add more categories as needed */}
+        
         </Select>
 
         <TextField
           label="Availability"
           name="availability"
-          value={bookData.availability}
+          value={bookData.isAvailabile}
           onChange={handleChange}
           select
           fullWidth

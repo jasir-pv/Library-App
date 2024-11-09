@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {Provider} from "react-redux"
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import reducers from './reducers';
 import {thunk} from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -17,7 +17,6 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
-
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -36,6 +35,5 @@ root.render(
     </Provider>
 
 );
-
 
 export { store, persistor };

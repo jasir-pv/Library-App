@@ -1,13 +1,29 @@
 import * as api from '../api'
+import axios from 'axios';
 
-import { CHECKIN_BOOK, CHECKOUT_BOOK, BOOKS_ERROR } from './types';
+import { CHECKIN_BOOK, CHECKOUT_BOOK, BOOKS_ERROR, FETCH_CHECKEDOUT_BOOKS,FETCH_BY_SEARCH,FETCH_BOOKS } from './types.js';
 
 
 export const getBooks = ()=> async (dispatch) =>{
 
     try {
+
         const {data} = await api.fetchBooks()
         dispatch ( {type: "FETCH_ALL", payload:data})
+    } catch (error) {
+        console.log(error.message, "get Book Error")
+    }
+}
+
+// SEarch
+
+
+export const getBooksBySearch = (searchQuery)=> async (dispatch) =>{
+
+    try {
+        const {data: {data}} = await api.fetchBooksBySearch(searchQuery)
+        dispatch ( {type: FETCH_BY_SEARCH, payload:data})
+
     } catch (error) {
         console.log(error.message, "get Book Error")
     }
@@ -41,26 +57,31 @@ export const updateBook= (id, book) => async (dispatch)=>{
     }
 }
 
-
-export const checkin = (id) => async (dispatch) => {
+export const checkout = (id, userId) => async (dispatch) => {
     try {
-        const { data } = await api.checkin(id); // Make sure api.checkin points to the correct endpoint
-        dispatch({ type: 'CHECKIN_BOOK', payload: data });
-        alert('Book Checked in Successfully!');
+        const { data } = await api.checkout(id, { userId });
+        dispatch({ type: CHECKOUT_BOOK, payload: data });
     } catch (error) {
-        dispatch({ type: BOOKS_ERROR, payload: error.message || "Check-in error" });
-        alert('Failed to Check in the Book');
+        dispatch({ type: BOOKS_ERROR, payload: error.message });
     }
 };
 
-export const checkout = (id) => async (dispatch)=>{
-    try{
-        const {data} =await api.checkout(id)
-        dispatch({type: 'CHECKOUT_BOOK', payload:data})
-        alert ('Book Checked out Succesfully!')
-    } catch (error){
-        dispatch ({ type: BOOKS_ERROR, payload: error.message})
-        alert('Failed to Check out the Book')
+export const checkin = (id, userId) => async (dispatch) => {
+    try {
+        const { data } = await api.checkin(id, { userId });
+        dispatch({ type: CHECKIN_BOOK, payload: data });
+    } catch (error) {
+        dispatch({ type: BOOKS_ERROR, payload: error.message });
     }
-}
+};
 
+
+
+export const fetchCheckedOutBooks = () => async (dispatch) => {
+    try {
+      const { data } = await api.fetchCheckedOutBooks();
+      dispatch({ type: FETCH_CHECKEDOUT_BOOKS, payload: data });
+    } catch (error) {
+      dispatch({ type: BOOKS_ERROR, payload: error.message });
+    }
+  };
