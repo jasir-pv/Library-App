@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchBooks } from '../api';
 import { getBooks,getBooksBySearch } from '../actions/books';
+import { mobile } from '../responsive';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
@@ -16,9 +18,14 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    /* ${mobile({ overflow: "hidden" })} */
 `
 const Logo = styled.h1`
     color: brown;
+`
+const Menu = styled.div`
+  text-align: left;
+  ${mobile({ display: "block" })}
 `
 
 const Navlinks = styled.ul`
@@ -27,6 +34,17 @@ const Navlinks = styled.ul`
     justify-content: space-between;
     text-decoration: none;
     list-style: none;
+    ${mobile({ 
+        display: (props) => (props.open ? "flex" : "none"),
+        flexDirection: "column",
+        position: "absolute",
+        top: "100px",
+        right: "0",
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        width: "100%",
+        padding: "20px",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    })}
 `
 
 const Users = styled.li`
@@ -68,7 +86,7 @@ const Button = styled.div`
     margin: 10px;
     padding: 7px 15px;
     border: none;
-    background-color: #f5ca1d;
+    background-color: #02495C;
     color: white;
     font-weight: 600;
     border-radius: 10px;
@@ -133,6 +151,8 @@ function Navbar() {
 
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [menuOpen, setMenuOpen] = useState(false);
+
 
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
@@ -166,6 +186,9 @@ function Navbar() {
         <Link to='/'>
         <Logo>Libe</Logo>
         </Link>
+        <Menu >
+      <MenuIcon/>
+      </Menu>
         
         <Navlinks>
         {user && user.isAdmin && (

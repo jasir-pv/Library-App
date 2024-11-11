@@ -47,7 +47,7 @@ const CheckIn = styled.button`
       padding: 15px 0;
       border: none;
       width: 100%;
-      background-color: ${({ isAvailable }) => (isAvailable ? 'black' : '#40e643')};
+      background-color: ${({ isAvailable }) => (isAvailable==="true" ? 'black' : '#02495C')};
       transition: background-color 0.3s ease;
       color: white;
       font-weight: 600;

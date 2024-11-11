@@ -11,6 +11,8 @@ import UsersList from './components/pages/UsersList';
 import { getBooks } from './actions/books';
 import SearchResults from './components/SearchResults';
 import CheckedOutBooks from './components/CheckedOutBooks';
+import Books from './components/Books';
+
 
 
 function App() {
@@ -34,6 +36,7 @@ useEffect(()=>{
           <Route path="/userslist" element={<UsersList />} />
           <Route path="/books/search" element={<SearchResults />} />
           <Route path="/checkedout-books" element={<CheckedOutBooks />} />
+          <Route path="/books" element={<Books />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -76,6 +76,7 @@ const LatestTitle = styled.p`
     text-align: center;
     margin-left: 60px;
     color: #6e5102;
+    ${mobile({ display: "none" })}
 `
                  
 
