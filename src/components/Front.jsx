@@ -8,7 +8,7 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 
     const Container = styled.div`
         width:  100%;
-        height: 60vh;
+        height: 70vh;
         background-color: white;
         display: flex;
         justify-content: flex-end;
@@ -18,10 +18,12 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
         justify-content: flex-end;
         width: 40%;
         height: 40vh;
+        margin-top: 40px;
     `
 
     const Left = styled.div`
         justify-content: flex-start;
+        margin-top: 50px;
     `
 
     const InfoContainer = styled.div`
