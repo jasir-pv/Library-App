@@ -1,5 +1,4 @@
 import * as api from '../api'
-import axios from 'axios';
 
 import { CHECKIN_BOOK, CHECKOUT_BOOK, BOOKS_ERROR, FETCH_CHECKEDOUT_BOOKS,FETCH_BY_SEARCH,FETCH_BOOKS } from './types.js';
 

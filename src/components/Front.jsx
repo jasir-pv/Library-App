@@ -1,7 +1,5 @@
 
-import React from 'react'
 import styled from 'styled-components'
-import Slider from './Slider'
 import { Link } from 'react-router-dom'
 import { mobile } from '../responsive'
 import SwiperSlider from './SwiperSlider'
