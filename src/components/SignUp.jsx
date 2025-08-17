@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../actions/auth.js';
 
@@ -13,15 +13,20 @@ function SignUp() {
     confirmPassword: '', 
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { error, loading } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    dispatch(signup(formData));
+    try {
+     await dispatch(signup({ ...formData }, navigate));
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

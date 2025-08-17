@@ -1,6 +1,6 @@
 // src/actions/userActions.js
 import * as api from '../api'; // Ensure this points to your API functions
-import { FETCH_USERS, DELETE_USER, EDIT_USER, USERS_ERROR } from './types';
+import { FETCH_USERS, DELETE_USER, EDIT_USER, USERS_ERROR, FETCH_BY_SEARCH, FETCH_BY_SEARCH_USER } from './types';
 
 // Fetch users action
 export const fetchUsers = () => async (dispatch) => {
@@ -32,3 +32,18 @@ export const editUser = (id, updatedUser) => async (dispatch) => {
     dispatch({ type: USERS_ERROR, payload: error.message });
   }
 };
+
+
+// SEarch
+
+
+export const getUsersBySearch = (searchQuery)=> async (dispatch) =>{
+
+  try {
+      const {data: {data}} = await api.fetchUsersBySearch(searchQuery)
+      dispatch ( {type: FETCH_BY_SEARCH_USER, payload:data})
+
+  } catch (error) {
+      console.log(error.message, "get Book Error")
+  }
+}

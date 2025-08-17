@@ -29,10 +29,11 @@
 
 
 // src/reducers/userReducer.js
-import { FETCH_USERS, DELETE_USER, EDIT_USER, USERS_ERROR } from '../actions/types';
+import { FETCH_USERS, DELETE_USER, EDIT_USER, USERS_ERROR, FETCH_BY_SEARCH_USER } from '../actions/types';
 
 const initialState = {
   users: [],
+  searchResultsUser:[],
   error: null,
 };
 
@@ -48,6 +49,9 @@ const userReducer = (state = initialState, action) => {
         users: state.users.map(user => (user._id === action.payload._id ? action.payload : user)),
         error: null,
       };
+      case FETCH_BY_SEARCH_USER:
+       
+      return { ...state, searchResultsUser: action.payload };
     case USERS_ERROR:
       return { ...state, error: action.payload };
     default:

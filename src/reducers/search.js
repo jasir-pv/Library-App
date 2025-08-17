@@ -1,5 +1,5 @@
 
-import { FETCH_BOOKS, CHECKIN_BOOK, CHECKOUT_BOOK,FETCH_CHECKEDOUT_BOOKS, BOOKS_ERROR, FETCH_BY_SEARCH } from '../actions/types.js';
+import { FETCH_BOOKS, CHECKIN_BOOK, CHECKOUT_BOOK,FETCH_CHECKEDOUT_BOOKS, BOOKS_ERROR, FETCH_BY_SEARCH, FETCH_BY_SEARCH_USER } from '../actions/types.js';
 
 
 const initialState = {
@@ -16,6 +16,8 @@ const searchReducer = (state = initialState, action) => {
       case FETCH_BY_SEARCH:
        
         return { ...state, searchResults: action.payload };
+
+
          
       case CHECKIN_BOOK:
       case CHECKOUT_BOOK:

@@ -23,6 +23,9 @@ API.interceptors.request.use((request) => {
  export const fetchBooksBySearch = (searchQuery)=>
    API.get(`/books/search?searchQuery=${searchQuery.searchTerm || 'none' }`);
 
+ export const fetchUsersBySearch = (searchQuery)=>
+  API.get(`/users/search?searchQuery=${searchQuery.searchTerm || 'none' }`);
+
  export const signup = (formData) => API.post("/auth/register", formData);
  export const login = (formData) => API.post("/auth/login", formData);
  export const verifyToken = (token) => API.get("/auth/verifyToken", { headers: { token: `Bearer ${token}` } });

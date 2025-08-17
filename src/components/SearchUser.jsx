@@ -2,25 +2,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getBooksBySearch } from '../actions/books';
 import styled from 'styled-components';
+import { getUsersBySearch } from '../actions/user';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
-const SearchResults = () => {
+const SearchUser = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const searchResults = useSelector((state) => state.search.searchResults);
-    const searchUsers = useSelector ((state) => state.search.searchUsers)
+    const searchUsers = useSelector ((state) => state.user.searchUsers)
     console.log(searchUsers)
 
     const query = useQuery().get('searchQuery');
 
     useEffect(() => {
         if (query) {
-            dispatch(getBooksBySearch({ searchTerm: query }));
+            dispatch(getUsersBySearch({ searchTerm: query }));
         }else if (query){
-          dispatch(getBooksBySearch({ searchTerm:query}))
+          dispatch(getUsersBySearch({ searchTerm:query}))
         }
     }, [dispatch, query]);
 
@@ -55,7 +55,7 @@ const SearchResults = () => {
     );
 };
 
-export default SearchResults;
+export default SearchUser;
 
 // Styled Components
 const Container = styled.div`

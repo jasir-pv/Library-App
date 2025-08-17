@@ -10,8 +10,9 @@ import { useEffect } from 'react';
 import UsersList from './components/pages/UsersList';
 import { getBooks } from './actions/books';
 import SearchResults from './components/SearchResults';
+import SearchUser from './components/SearchUser';
 import CheckedOutBooks from './components/CheckedOutBooks';
-import Books from './components/Books';
+import AllBooks from './components/pages/AllBooks';
 
 
 
@@ -35,8 +36,9 @@ useEffect(()=>{
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/userslist" element={<UsersList />} />
           <Route path="/books/search" element={<SearchResults />} />
+          <Route path="/users/search" element={<SearchUser />} />
           <Route path="/checkedout-books" element={<CheckedOutBooks />} />
-          <Route path="/books" element={<Books />} />
+          <Route path="/books" element={<AllBooks />} />
         </Routes>
       </BrowserRouter>
     </div>

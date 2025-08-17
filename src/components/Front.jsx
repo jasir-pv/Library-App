@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import Slider from './Slider'
 import { Link } from 'react-router-dom'
 import { mobile } from '../responsive'
-
+import SwiperSlider from './SwiperSlider'
+import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 
 
     const Container = styled.div`
@@ -17,7 +18,7 @@ import { mobile } from '../responsive'
     `
     const Right = styled.div`
         justify-content: flex-end;
-        width: 50%;
+        width: 40%;
         height: 40vh;
     `
 
@@ -30,27 +31,61 @@ import { mobile } from '../responsive'
         padding: 50px;
         ${mobile({ textAlign: "center" })}
     `
-    const Title = styled.h1`
-        font-size: 50px;
-        ${mobile({ fontSize: "25px" })}
-
-    `
-    const Desc = styled.p`
-        margin: 30px 30px;
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: 1px;
-        ${mobile({ fontSize: "14px",fontWeight: '400' })}
-    `
+const Title = styled.h1`
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    margin-top: 10px;
+    
+    ${mobile({ 
+        fontSize: "2rem",
+        marginBottom: '15px'
+    })}
+`
+const Desc = styled.div`
+    margin: 30px 0;
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    line-height: 1.6;
+    
+    ${mobile({ 
+        fontSize: "1rem",
+        margin: '20px 0'
+    })}
+`
     const Button = styled.button`
-        padding: 10px;
-        background-color: transparent;
-        cursor: pointer;
-        font-size: 20px;
-        ${mobile({ padding: "5px", fontSize:'12px' })}
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    align-self: flex-start;
+    margin-top: 10px;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+    
+    ${mobile({ 
+        padding: "10px 25px",
+        alignSelf: 'center',
+        fontSize: '0.9rem'
+    })}
     ` 
 
 function Front() {
+
+    const words =         `"Libraries were full of ideas—perhaps the most dangerous and powerful of all weapons.”
+`;
+
   return (
     <Container>
     <Left>
@@ -58,16 +93,14 @@ function Front() {
         <Title>
             Find Your Books
         </Title>
-        <Desc>
-        “Libraries were full of ideas—perhaps the most dangerous and powerful of all weapons.”
-        </Desc>
+       <TextGenerateEffect duration={2} filter={false} words={words} />
         <Link to='/books'>
         <Button>All Books</Button>
         </Link>
     </InfoContainer>
     </Left>
       <Right>
-        <Slider/>
+        <SwiperSlider/>
       </Right>
     </Container>
   )
