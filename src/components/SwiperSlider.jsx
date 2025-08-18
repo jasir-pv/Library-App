@@ -77,6 +77,7 @@ const SwiperSlider = () => {
 
         .swiper-img {
           object-fit: cover;
+          height: 350px;
           border-radius: 7px;
           box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }

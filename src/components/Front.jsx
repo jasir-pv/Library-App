@@ -6,6 +6,7 @@ import SwiperSlider from './SwiperSlider'
 import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 
 
+
     const Container = styled.div`
         width:  100%;
         height: 70vh;
@@ -83,7 +84,7 @@ const Desc = styled.div`
 
 function Front() {
 
-    const words =         `"Libraries were full of ideas—perhaps the most dangerous and powerful of all weapons.”
+    const words =`"Libraries were full of ideas—perhaps the most dangerous and powerful of all weapons.”
 `;
 
   return (
@@ -102,6 +103,8 @@ function Front() {
       <Right>
         <SwiperSlider/>
       </Right>
+
+   
     </Container>
   )
 }

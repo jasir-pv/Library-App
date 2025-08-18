@@ -79,7 +79,10 @@ function Books() {
         justifyContent: 'center',
       }}>
         {filteredBooks.map((book) => (
-          <Wrapper key={book._id || book.id} onClick={() => handleBookClick(book._id || book.id)}>
+          <Wrapper key={book._id || book.id}
+                   onClick={() => handleBookClick(book._id || book.id)}
+                   style={{ height: 350}}>
+                   
             <img src={book.selectedFile} 
               style={{ maxWidth: 250, height: 250 }}
               alt="Img" />
