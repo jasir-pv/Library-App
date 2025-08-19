@@ -61,7 +61,7 @@ function EditBook({book, setIsEditing}) {
         borderRadius: 2,
       }}
     >
-      <Typography variant="h5" align="center">
+      <Typography variant="h4" align="center">
         Edit Book
       </Typography>
 

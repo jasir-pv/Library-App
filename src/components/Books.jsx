@@ -8,7 +8,7 @@ import { mobile } from '../responsive';
 
 // Styled components
 const Wrapper = styled.div`
-  max-width: 250px;
+  width: 250px;
   height: 320px;
   cursor: pointer;
   background-color: rgb(250, 251, 252);
