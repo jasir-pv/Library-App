@@ -10,21 +10,23 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
     const Container = styled.div`
         width:  100%;
         height: 70vh;
-        background-color: white;
         display: flex;
         justify-content: flex-end;
         ${mobile({ display: "flex", justifyContent: 'center' })}
     `
-    const Right = styled.div`
+        const Right = styled.div`
         justify-content: flex-end;
         width: 40%;
         height: 40vh;
         margin-top: 40px;
-    `
+
+        ${mobile({ display: "none" })} 
+        `;
+
 
     const Left = styled.div`
         justify-content: flex-start;
-        margin-top: 50px;
+        margin-top: 100px;
     `
 
     const InfoContainer = styled.div`
@@ -45,17 +47,7 @@ const Title = styled.h1`
         marginBottom: '15px'
     })}
 `
-const Desc = styled.div`
-    margin: 30px 0;
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    line-height: 1.6;
-    
-    ${mobile({ 
-        fontSize: "1rem",
-        margin: '20px 0'
-    })}
-`
+
     const Button = styled.button`
     padding: 12px 30px;
     background: linear-gradient(135deg, #3498db, #2c3e50);

@@ -10,14 +10,14 @@ const Wrapper = styled.div`
     width: 250px;
     height: 320px;
     cursor: pointer;
-    background-color: #dedcdc;
+    background-color:rgb(250, 251, 252);
     padding-top: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
      box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
     &:hover {
-      background-color: #a69e9d;
+      background-color:rgb(194, 229, 255);
       transform: scale(1.03); /* Slight zoom-in on hover */
        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Darker shadow on hover */
     }
@@ -84,14 +84,19 @@ function Books() {
                    style={{ height: 350}}>
                    
             <img src={book.selectedFile} 
-              style={{ maxWidth: 250, height: 250 }}
+              style={{ maxWidth: 250, height: 220, objectFit: 'cover' }}
               alt="Img" />
+              <div style={{ padding: 2}}>
             <h4>{book.title}</h4>
             <p style={{ fontFamily: 'sans-serif', fontSize: 13, marginTop: 5 }}>
               {book.author}
             </p>
             
-            <p>{book.isAvailable ? "Available" : "Checked Out"}</p>      
+            <p style={{ color: book.isAvailable ? "green" : "red", fontWeight: "500" }}>
+              {book.isAvailable ? "Available" : "Checked Out"}
+            </p>      
+
+              </div>
           </Wrapper>
         ))}
       </div>

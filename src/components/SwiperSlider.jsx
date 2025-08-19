@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import { useSelector } from 'react-redux';
+import { mobile } from '../responsive'
 
 const SwiperSlider = () => {
   const books = useSelector((state) => state.books);
@@ -63,6 +64,8 @@ const SwiperSlider = () => {
           margin: auto;
           text-align: center;
           font-family: 'Poppins', sans-serif;
+          
+          ${mobile({ display: "none" })} 
         }
 
         .heading {
