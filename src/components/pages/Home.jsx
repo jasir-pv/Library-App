@@ -4,6 +4,7 @@ import Books from '../Books'
 import { useDispatch } from 'react-redux'
 import {getBooks} from "../../actions/books"
 import Front from '../Front'
+import LatestBooks from '../LatestBooks'
 
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
     <div>
       <Navbar/>
       <Front/>
+      <LatestBooks />
       <Books />
       
     </div>
