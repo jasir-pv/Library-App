@@ -12,8 +12,7 @@ import { mobile } from '../responsive'
 
 const SwiperSlider = () => {
   const books = useSelector((state) => state.books);
-  const latestBooks = books.slice(-5);
-
+  const latestBooks = Array.isArray(books) ? books.slice(-5) : [];
   if (latestBooks.length === 0) {
     return <h2>No books available</h2>;
   }

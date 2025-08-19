@@ -39,7 +39,7 @@ const Right = styled.div`
 const Left = styled.div`
   justify-content: flex-start;
   margin-top: 100px;
-  ${mobile({ marginTop: "40px" })}
+  ${mobile({ marginTop: "30px" })}
 `;
 
 const InfoContainer = styled.div`

@@ -146,7 +146,7 @@ const FilterContainer = styled.div`
 `;
 
 function Books() {
-  const books = useSelector((state) => state.books);
+  const books = useSelector((state) => state.books || []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
