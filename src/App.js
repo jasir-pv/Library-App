@@ -13,6 +13,7 @@ import SearchResults from './components/SearchResults';
 import SearchUser from './components/SearchUser';
 import CheckedOutBooks from './components/CheckedOutBooks';
 import AllBooks from './components/pages/AllBooks';
+import BooksMobView from './components/mobile/BooksMobView';
 
 
 
@@ -39,6 +40,7 @@ useEffect(()=>{
           <Route path="/users/search" element={<SearchUser />} />
           <Route path="/checkedout-books" element={<CheckedOutBooks />} />
           <Route path="/books" element={<AllBooks />} />
+           <Route path="/all-books-mob" element={<BooksMobView />} />
         </Routes>
       </BrowserRouter>
     </div>

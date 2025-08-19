@@ -1,35 +1,32 @@
 import { Select, MenuItem } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBooks } from '../actions/books.js';
+import { getBooks } from '../../actions/books.js';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { mobile } from '../responsive';
+import { mobile } from '../../responsive.js';
 
 // Styled components
 const Wrapper = styled.div`
-  max-width: 250px;
-  height: 320px;
-  cursor: pointer;
-  background-color: rgb(250, 251, 252);
-  padding: 10px 5px 0 5px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
-
-  &:hover {
-    background-color: rgb(194, 229, 255);
-    transform: scale(1.03);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  ${mobile`
-    width: 200px;
+    width: 170px;
     height: 250px;
-  `}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(250, 251, 252);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+    
+    &:hover {
+      background-color: rgb(194, 229, 255);
+      transform: scale(1.03);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    }
 `;
-
 
 const BooksContainer = styled.div`
   display: flex;
@@ -37,14 +34,15 @@ const BooksContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  gap :16px;
+  gap:16px;
   
 
   @media (max-width: 768px) {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
     justify-content: flex-start;
+    padding: 10px;
     gap: 12px;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -56,34 +54,14 @@ const BooksContainer = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ 
   width: 100%;
-  padding: 0 20px;
-  margin-bottom:0 20px;
+  padding: 0 5px;
+
   
-  ${mobile({ 
-    padding: '0',
-    marginBottom: '0px'
-  })}
-`;
-
-
-const BookImage = styled.img`
-  max-width: 250px;
-  height: 220px;
-  object-fit: cover;
-
-  @media (max-width: 600px) {
-    max-width: 250px;
-    height: 150px;
-  }
-`;
-
+`
 const BookTitile = styled.h3`
 
-  
   
   ${mobile({ 
     fontWeight: '600',
@@ -117,35 +95,17 @@ const Title = styled.h2`
   ${mobile({ fontSize: '22px' })}
 `;
 
-const MoreButton = styled.button`
-  background: linear-gradient(135deg, #3498db, #2c3e50);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-  }
-  
-  ${mobile({ 
-    padding: '6px 12px',
-    fontSize: '12px'
-  })}
-`;
+
 
 const FilterContainer = styled.div`
-  margin-bottom: 20px;
-  
-  ${mobile({ display: 'none' })}
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-left: 0px; /* adjust as needed */
 `;
 
-function Books() {
+function BooksMobView() {
   const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -163,22 +123,17 @@ function Books() {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-
-  const handleMoreClick = () => {
-    // Navigate to a page with all books or perform another action
-    navigate('/all-books-mob');
-  };
  
   const filteredBooks = selectedCategory === 'All'
     ? books
     : books.filter((book) => book.category === selectedCategory);
     
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px' }}>
       {/* Header with title and more button */}
       <HeaderContainer>
-        <Title>Books</Title>
-        <MoreButton onClick={handleMoreClick}>More</MoreButton>
+        <Title>All Books</Title>
+       
       </HeaderContainer>
 
       {/* Category filter - hidden on mobile */}
@@ -209,7 +164,11 @@ function Books() {
             onClick={() => handleBookClick(book._id || book.id)}
            
           >
-            <BookImage src={book.selectedFile} alt="Book cover" />
+            <img
+              src={book.selectedFile}
+              style={{ maxWidth: 250, height: 150, objectFit: "cover" }}
+              alt="Book cover"
+            />
             <div style={{ padding: 2 }}>
               <BookTitile>{book.title}</BookTitile>
               <AuthorName >
@@ -228,4 +187,4 @@ function Books() {
   );
 }
 
-export default Books;
+export default BooksMobView;
