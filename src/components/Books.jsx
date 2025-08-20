@@ -61,15 +61,21 @@ const HeaderContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 0 20px;
-  margin-bottom:0 20px;
+  margin-bottom: 20px;
+
+  // hide on desktop by default
   display: none;
-  
+
   ${mobile({ 
-    padding: '0',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    padding: '0 10px',
     marginBottom: '0px',
-    display: 'block'
   })}
 `;
+
 
 
 const BookImage = styled.img`
