@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background-color: rgb(194, 229, 255);
+    background-color: #ede9fe;
     transform: scale(1.03);
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
   }
@@ -62,10 +62,12 @@ const HeaderContainer = styled.div`
   width: 100%;
   padding: 0 20px;
   margin-bottom:0 20px;
+  display: none;
   
   ${mobile({ 
     padding: '0',
-    marginBottom: '0px'
+    marginBottom: '0px',
+    display: 'block'
   })}
 `;
 
@@ -81,9 +83,10 @@ const BookImage = styled.img`
   }
 `;
 
-const BookTitile = styled.h3`
+const BookTitile = styled.h5`
 
-  
+  font-size: 15px;
+  line-height: 18px;
   
   ${mobile({ 
     fontWeight: '600',
@@ -94,7 +97,8 @@ const BookTitile = styled.h3`
 const AuthorName = styled.p`
     font-family: sans-serif;
     font-size: 11;
-    margin-top: 5;
+    margin-top: 3px;
+    margin-bottom: 2px;
 
      ${mobile({ fontSize: '11px' })}
 `

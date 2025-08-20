@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
+
   
   ${mobile({ 
     flexDirection: 'column',
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
 const Details = styled.div`
   display: flex;
   max-width: 800px;
-  margin: 20px 0;
+  margin: 100px 0;
   
   ${mobile({ 
     flexDirection: 'column',
