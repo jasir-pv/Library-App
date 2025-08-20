@@ -15,6 +15,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    
     background-color: rgb(250, 251, 252);
     margin-bottom: 20px;
     border-radius: 10px;
@@ -41,7 +42,7 @@ const BooksContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 10px;
     gap: 12px;
     -ms-overflow-style: none;
@@ -129,6 +130,7 @@ function BooksMobView() {
     : books.filter((book) => book.category === selectedCategory);
     
   return (
+    
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px' }}>
       {/* Header with title and more button */}
       <HeaderContainer>
@@ -184,6 +186,7 @@ function BooksMobView() {
         ))}
       </BooksContainer>
     </div>
+
   );
 }
 

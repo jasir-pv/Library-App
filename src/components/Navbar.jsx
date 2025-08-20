@@ -64,7 +64,7 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
-  // Mobile drawer content
+  // Mobile drawer content (without search)
   const drawer = (
     <Box sx={{ width: 250, padding: 2 }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
@@ -77,23 +77,6 @@ export default function Navbar() {
       </Box>
       
       <Divider sx={{ mb: 2 }} />
-      
-      {/* Search in mobile drawer */}
-      <Box sx={{ display: "flex", alignItems: "center", mb: 3, backgroundColor: "white", 
-                 borderRadius: 1, px: 1, border: "1px solid #ccc" }}>
-        <TextField
-          variant="standard"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyPress}
-          InputProps={{ disableUnderline: true, sx: { fontSize: "1rem" } }}
-          sx={{ minWidth: 120, flexGrow: 1 }}
-        />
-        <IconButton onClick={handleSearch} size="small">
-          <SearchIcon sx={{ fontSize: "1.1rem", color: "black" }} />
-        </IconButton>
-      </Box>
       
       <List>
         <ListItem button onClick={() => handleNavigation("/")}>
@@ -167,7 +150,7 @@ export default function Navbar() {
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "#02495c", height: 80, justifyContent: 'center'}}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           {/* Logo */}
           <Typography
             variant="h6"
@@ -178,10 +161,39 @@ export default function Navbar() {
               color: "white",
               fontWeight: 'bold',
               fontSize: "2rem",
+              
             }}
           >
             Libe
           </Typography>
+
+          {/* Mobile Search - Centered */}
+          <Box sx={{ 
+            display: { xs: "flex", md: "none" }, 
+            alignItems: "center", 
+            backgroundColor: "white", 
+            borderRadius: 1, 
+            px: 1,
+            mx: 1,
+            flexGrow: 1,
+            maxWidth: 230
+          }}>
+            <TextField
+              variant="standard"
+              placeholder="Search books..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyPress}
+              InputProps={{ 
+                disableUnderline: true, 
+                sx: { fontSize: "0.9rem" } 
+              }}
+              sx={{ flexGrow: 1 }}
+            />
+            <IconButton onClick={handleSearch} size="small">
+              <SearchIcon sx={{ fontSize: "1.1rem", color: "black" }} />
+            </IconButton>
+          </Box>
 
           {/* Desktop Links */}
           <Box
@@ -223,7 +235,7 @@ export default function Navbar() {
               </>
             )}
 
-            {/* Search */}
+            {/* Desktop Search */}
             <Box
               sx={{
                 display: "flex",
@@ -304,7 +316,7 @@ export default function Navbar() {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: "block", md: "none" },
