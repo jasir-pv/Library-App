@@ -6,6 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Testing the App
+
+To test the application, you can log in with the following **admin credentials**:
+
+- **Username:** `admin`  
+- **Password:** `admin`
+
+This will give you access to the admin features of the app.
+
 ### `npm start`
 
 Runs the app in the development mode.\
